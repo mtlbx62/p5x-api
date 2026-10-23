@@ -1,0 +1,11 @@
+### Créer un nouveau personnage
+POST http://localhost:8080/api/characters
+Content-Type: application/json
+
+{
+  "name": "Wonder",
+  "codename": "Protagonist",
+  "initialPersona": "Janus",
+  "element": "Almighty",
+  "rarity": 5
+}

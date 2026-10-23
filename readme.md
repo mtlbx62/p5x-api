@@ -1,37 +1,38 @@
-# baseSpringBoot
+# Projet R3-03 (Sprint 1)
 
-A Spring Boot application using Java 21, Maven, and PostgreSQL. Docker Compose starts the application and its database together.
+API REST développé à l'aide du fichier Spring Boot permet de gérer les personnages de l'univers de **Personna 5 Phantom X**.
 
-## Requirements
+## Réaliser par **Marouan TALBI - BUT2 TPD TD2 (Username : mtlbx62)**
 
-- Docker Engine or Docker Desktop
-- Docker Compose (`docker-compose` command)
+## Technologie auquel j'ai pu utilisées afin de réaliser le API : 
+* **Java** et **Fichier SpringBoot donné auprès de Monsieur Vitse**
+* **Spring Data JPA (Hibernate)**
+* **PostgreSQL** et **Docker Desktop**
+* **Maven**
+* *OS utilisé* : **Windows 11**
 
-## Launch
+## Architecture du projet
+Le projet met en avant une architecture de 4 fichiers suivant tel que : 
+* `model/` : Entité JPA `Character.java`
+* `repository/` : Interface `CharacterRepository.java` pour accès au données.
+* `service/` : Classe `CharacterService.java` pour la logique métier.
+* `controller/` : Classe `CharacterController.java` pour le endpoints REST.
 
-From the project root, run:
+Le projet doit se mettre en avant sur les connaissances dédiée au Endpoints de l'API qui se nomme le CRUD : 
 
-```bash
-docker-compose up
-```
+* POST : `/api/characters` permet d'ajouter un personnage.
+* GET : `/api/characters` permet de lister tous les personnages dans le jeu.
+* GET : `/api/characters/{id}` permet d'obtenir un personnage par son ID.
+* PUT : `/api/characters/{id}` permet de modifier un personnage.
+* DELETE : `/api/characters/{id}` qui permet de supprimer un personnage.
 
-Compose builds the application image, starts PostgreSQL, waits for the database to become healthy, and then starts the application. On the first launch, building the image may take a few minutes.
+## Commande du Lancement de l'application
 
-Once the application has started, it is available at <http://localhost:8080>. PostgreSQL is exposed on `localhost:5433`.
+1. **Démarrer la base de données :**
+``bash
+docker-compose up -d
 
-To run the containers in the background instead, use `docker-compose up -d`. To stop them, run `docker-compose down` from the project root.
+2. **Lancer le serveur Spring-Boot :**
 
-The Compose configuration uses a named volume (`postgres_data`) to retain database data when the containers are stopped.
-
-Adminer is available at <http://localhost:8081/?pgsql=postgres&username=postgres&db=base_db> for managing the PostgreSQL database through a web interface.
-
-## Reset the database
-
-If the database is in a bad state and you want to start over, run:
-
-```bash
-docker compose down -v
-docker compose up -d
-```
-
-The `-v` option deletes the database volume, so **all stored database data will be permanently removed**. The second command recreates the containers in the background.
+``bash
+mvn spring-boot:run
