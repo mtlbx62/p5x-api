@@ -1,15 +1,12 @@
 package com.basespringboot.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "character")
 public class Character {
 
     @Id
@@ -21,4 +18,66 @@ public class Character {
     private String initialPersona;
     private String element;
     private int rarity;
+
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Skill> skills = new ArrayList<>();
+
+    // --- Getters et Setters ---
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCodename() {
+        return codename;
+    }
+
+    public void setCodename(String codename) {
+        this.codename = codename;
+    }
+
+    public String getInitialPersona() {
+        return initialPersona;
+    }
+
+    public void setInitialPersona(String initialPersona) {
+        this.initialPersona = initialPersona;
+    }
+
+    public String getElement() {
+        return element;
+    }
+
+    public void setElement(String element) {
+        this.element = element;
+    }
+
+    public int getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(int rarity) {
+        this.rarity = rarity;
+    }
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
 }
